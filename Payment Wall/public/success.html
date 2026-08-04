@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Successful | Invoice Paid</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              500: '#22c55e',
+              600: '#16a34a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .glass-card {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-full flex flex-col justify-center items-center p-4 selection:bg-brand-500 selection:text-white">
+  
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-500/15 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative z-10 glass-card rounded-2xl p-8 sm:p-10 max-w-md w-full text-center shadow-2xl">
+    
+    <!-- Success Icon Animation -->
+    <div class="w-20 h-20 bg-brand-500/10 border border-brand-500/30 rounded-full flex items-center justify-center mx-auto mb-6 text-brand-400">
+      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+
+    <span id="mockBadge" class="hidden text-[10px] font-bold uppercase tracking-widest text-amber-400 bg-amber-950/80 px-2.5 py-1 rounded-full border border-amber-500/30 mb-3 inline-block">Dev Sandbox Simulation</span>
+
+    <h1 class="text-2xl sm:text-3xl font-extrabold text-white">Payment Successful</h1>
+    <p class="text-sm text-slate-400 mt-2">Thank you! Your payment request has been completed and verified.</p>
+
+    <!-- Details Box -->
+    <div class="bg-slate-900/90 rounded-xl p-4 my-6 border border-slate-800 text-left space-y-2 text-xs">
+      <div class="flex justify-between">
+        <span class="text-slate-400">Reference No:</span>
+        <span id="refDisplay" class="font-mono text-slate-200 font-semibold">INV-2026-0849</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-slate-400">Amount Paid:</span>
+        <span id="amountDisplay" class="text-brand-400 font-bold">MYR 450.00</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-slate-400">Channel / Rail:</span>
+        <span id="channelDisplay" class="text-slate-200 font-medium capitalize">DuitNow QR</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-slate-400">Status:</span>
+        <span class="text-emerald-400 font-semibold flex items-center">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5"></span> Verified Completed
+        </span>
+      </div>
+    </div>
+
+    <a href="index.html" class="inline-block w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 px-6 rounded-xl border border-slate-700 transition-colors text-sm">
+      Back to Invoice Wall
+    </a>
+  </div>
+
+  <script>
+    // Parse URL params
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('ref') || 'INV-' + Math.floor(1000 + Math.random() * 9000);
+    const amount = params.get('amount') || '450.00';
+    const channel = params.get('channel') || 'DuitNow';
+    const isMock = params.get('mock') === 'true';
+
+    document.getElementById('refDisplay').textContent = ref;
+    document.getElementById('amountDisplay').textContent = `MYR ${parseFloat(amount).toFixed(2)}`;
+    document.getElementById('channelDisplay').textContent = channel;
+    if (isMock) {
+      document.getElementById('mockBadge').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
