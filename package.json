@@ -1,0 +1,24 @@
+{
+  "name": "hitpay-cloudflare-payment-wall",
+  "version": "1.0.0",
+  "description": "Production-ready payment wall deployed to Cloudflare Pages using Pages Functions & HitPay API",
+  "main": "functions/api/checkout.js",
+  "scripts": {
+    "dev": "wrangler pages dev public --live-reload",
+    "deploy": "wrangler pages deploy public"
+  },
+  "keywords": [
+    "cloudflare-pages",
+    "cloudflare-functions",
+    "hitpay",
+    "payment-wall",
+    "myr",
+    "duitnow",
+    "fpx"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
